@@ -10,12 +10,12 @@ CREATE TABLE emp_records (employee_id INT,
 
 INSERT INTO emp_records (employee_id, emp_name, manager_id, work_role)  
    VALUES  (1, 'Bob', NULL, 'CEO'),
-	 (2, 'Sarah', 1, 'Senior Manager'),
-	 (3, 'Tim', 2, 'Customer Manager'),
-	 (4, 'Susan', 2, 'Engineer'),
-	 (5, 'Clive', 3, 'CA'),
-	 (6, 'Thomas', 3, 'CA'),
-	 (7, 'Barbara', 3, ‘CA');
+	   (2, 'Barbara', 3, 'CA'),
+	   (3, 'Susan', 2, 'Engineer'),
+           (4, 'Tim', 2, 'Customer Manager'),
+           (5, 'Clive', 3, 'CA'),
+           (6, 'Thomas', 3, 'CA'),
+	   (7, 'Sarah', 1, 'Senior Manager');
 
 SELECT * FROM emp_records;
 ```
@@ -23,12 +23,13 @@ SELECT * FROM emp_records;
 | employee_id | emp_name | manager_id | work_role |
 |-------------|----------|------------|-----------|
 | 1	 | Bob		| null | CEO | 
-| 2	| Sarah |	1	| Senior | Manager |
-| 3	| Tim	| 2	| Customer Manager |
-| 4	| Susan | 2	| Engineer |
+| 2	|  Barbara 	| 3	| CA |
+| 3	|  Susan | 2	| Engineer |
+| 4	| Tim	| 2	| Customer Manager |
 | 5	| Clive 	| 3	| CA | 
 | 6	| Thomas 	| 3	| CA |
-| 7	| Barbara 	| 3	| CA |
+| 7	| Sarah |	1	| Senior | Manager |
+
 
 
 Using this table I created a recursive CTE to return the management hierarchy from the employee named Sarah downwards.
@@ -56,10 +57,10 @@ JOIN emp_records AS e2 ON e2.employee_id = h2.manager_id;
 
 | employee_id | emp_name | manager_name |
 |-------------|----------|--------------|
-| 2	| Sarah | Bob |
-| 3	| Tim | Sarah |
-| 4	 | Susan | Sarah |
+| 7	| Sarah | Bob |
+| 3	| Susan | Sarah |
+| 4	 | Tim | Sarah |
+| 2	| Barbara | Tim |
 | 5	| Clive | Tim |
-| 6	| Thomas | Tim |
-| 7	| Barbara |Tim |
+| 6	| Thomas |Tim |
 
